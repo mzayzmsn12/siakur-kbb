@@ -3,7 +3,7 @@
     <div class="col-12">
 
       @if(session('status'))
-        <div class="alert alert-primary" style="color:white">
+        <div class="alert alert-success" style="color:white">
             {{session('status')}}
         </div>
       @endif

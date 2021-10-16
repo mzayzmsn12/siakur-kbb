@@ -241,6 +241,6 @@ class UsulanController extends Controller
 
         return view('layouts.admin.status', compact('usulanbantuan'));
         // return view('layouts.admin.usulan');
-        // ddd($usulanbantuan);
+        // dd($usulanbantuan);
     }
 }

@@ -3,7 +3,7 @@
     <div class="col-12">
 
       @if(session('status'))
-        <div class="alert alert-primary" style="color:white">
+        <div class="alert alert-success" style="color:white">
             {{session('status')}}
         </div>
       @endif
@@ -111,8 +111,21 @@
                   <h5 class="modal-title" id="exampleModalLabel">Nomor BAST</h5>
                 </div>
                 <div class="modal-body">
+                      <div class="form-group">
+                      <label for="fileproposal" class="form-control-label text-justify">Nomor BAST</label>
                       <input type="text" class="form-control" name="no_bast" id="no_bast" placeholder="Masukan nomor Berita Acara Serah Terima">
-
+                      </div>
+                      <div class="form-group">
+                          <label for="filelaporan" class="form-control-label">File Proposal</label>
+                          <div class="input-group">
+                            <input type="file" class="form-control @error('fileproposal') is-invalid @enderror" id="filelaporan" name="filelaporan">
+                            @error('filelaporan')
+                            <div class="invalid-feedback">
+                              {{ $message}}
+                            </div>
+                            @enderror
+                          </div>
+                      </div>
                 </div>
                 <div class="modal-footer">
                   <button type="submit" class="btn bg-gradient-info btn-sm">Selesai</button>

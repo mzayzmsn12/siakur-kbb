@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Laporan')
+
 @section('sidebar')
 @include('component.normal.sidebar')
 @endsection

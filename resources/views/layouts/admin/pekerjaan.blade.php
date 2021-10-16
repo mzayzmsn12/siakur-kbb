@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Pekerjaan')
+
 @section('sidebar')
 @include('component.admin.admin-sidebar')
 @endsection

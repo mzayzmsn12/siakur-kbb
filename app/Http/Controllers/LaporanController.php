@@ -34,14 +34,24 @@ class LaporanController extends Controller
 
     public function kirimLaporan(Request $request, $id)
     {
+
+      $request->validate([
+          'filelaporan' => 'required|file|mimes:pdf|max:4096'
+          ]);
+
       if($request->isMethod('post')){
+
+        //name&directory setting for proposal
+        $fileName = time().'_'.$request->filelaporan->getClientOriginalName();
+        $filePathProposal = $request->file('filelaporan')->storeAs(Auth::user()->id.'/laporan/', $fileName, 'public');
 
         $usulanbantuan = DB::table('proposals')
                         ->where('id', $id)
                         ->where('proposals.user_id', '=', Auth::user()->id)
                         ->update([
                           'status_pekerjaan' => 2,
-                          'no_bast' => $request->input('no_bast')
+                          'no_bast' => $request->input('no_bast'),
+                          'upload_laporan' => $filePathProposal,
                         ]);
 
           // return view('layouts.admin.usulan', compact('usulanbantuan'));
@@ -65,7 +75,7 @@ class LaporanController extends Controller
                       ->join('schools', function($join){
                           $join->on('schools.npsn', '=', 'users.npsn');
                       })
-                      ->get();
+                      ->get(['proposals.id','proposal_types.jenis_bantuan','proposal_types.satuan','users.name','proposals.kebutuhan','proposals.anggaran','proposals.persentase','proposals.status_usulan','proposals.status_pekerjaan','proposals.created_at','proposals.upload_proposal','proposals.upload_foto','proposals.upload_laporan','schools.nama_sekolah','proposals.penjelasan','users.email','schools.siswaT','schools.jml_rombel','schools.siswaT','schools.jml_rk','proposals.developer','proposals.no_bast']);
 
         return view('layouts.admin.laporan', compact('laporan_admin'));
         // return view('layouts.admin.usulan');
